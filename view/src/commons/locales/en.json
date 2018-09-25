@@ -1,3 +1,34 @@
 {
-  "app_name": "Cleaning App"
+  "app_name": "Cleaning App",
+  "lang": {
+    "placeholder": "language",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "menu": {
+    "cleaning": {
+      "root": "Cleaning",
+      "list": "Cleaning List",
+      "edit": "Cleaning Edit"
+    },
+    "information": {
+      "root": "Informations",
+      "list": "Info List",
+      "edit": "Info Edit"
+    },
+    "staff": {
+      "root": "Staffs",
+      "list": "Staff List",
+      "edit": "Staff Edit"
+    },
+    "master": {
+      "root": "Settings",
+      "config": "App Settings",
+      "place": "Room Settings",
+      "report": "Report Settings"
+    }
+  },
+  "signin": "Sign in",
+  "signout": "Sign out",
+  "mypage": "Account Settings"
 }

@@ -8,8 +8,12 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { signOut } from '../actions';
+import AppHeader from '../components/AppHeader';
 
 const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
   layout: {
     width: 'auto',
     display: 'block', // Fix IE11 issue.
@@ -37,21 +41,24 @@ const Top = ({
 }) => (
   <React.Fragment>
     <CssBaseline />
-    <main className={classes.layout}>
-      <Paper className={classes.paper}>
-        <Typography variant="headline">{username}</Typography>
-        <Typography variant="headline">{token}</Typography>
-        <Button
-          type="button"
-          fullWidth
-          variant="raised"
-          color="primary"
-          onClick={signOut}
-        >
-          Sign Out
-        </Button>
-      </Paper>
-    </main>
+    <div className={classes.root}>
+      <AppHeader />
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Typography variant="headline">{username}</Typography>
+          <Typography variant="headline">{token}</Typography>
+          <Button
+            type="button"
+            fullWidth
+            variant="raised"
+            color="primary"
+            onClick={signOut}
+          >
+            Sign Out
+          </Button>
+        </Paper>
+      </main>
+    </div>
   </React.Fragment>
 );
 

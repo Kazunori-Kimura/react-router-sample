@@ -36,7 +36,10 @@ function* signIn(action) {
     // 成功
     yield put(signInSucceeded(data));
 
-    // トークン更新処理をキック
+    // localStorageにtokenをセット
+    localStorage.setItem('mytoken', JSON.stringify(data));
+
+    // トークン定期更新処理をキック
     yield put(refreshToken());
   } catch (err) {
     // 失敗

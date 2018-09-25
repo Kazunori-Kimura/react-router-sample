@@ -1,3 +1,34 @@
 {
-  "app_name": "清掃アプリ"
+  "app_name": "清掃アプリ",
+  "lang": {
+    "placeholder": "言語",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "menu": {
+    "cleaning": {
+      "root": "清掃管理",
+      "list": "清掃管理一覧",
+      "edit": "清掃サービス編集"
+    },
+    "information": {
+      "root": "お知らせ管理",
+      "list": "お知らせ一覧",
+      "edit": "お知らせ編集"
+    },
+    "staff": {
+      "root": "スタッフ管理",
+      "list": "スタッフ一覧",
+      "edit": "スタッフ登録"
+    },
+    "master": {
+      "root": "マスター管理",
+      "config": "アプリ設定",
+      "place": "清掃場所設定",
+      "report": "清掃報告設定"
+    }
+  },
+  "signin": "ログイン",
+  "signout": "ログアウト",
+  "mypage": "マイページ"
 }
