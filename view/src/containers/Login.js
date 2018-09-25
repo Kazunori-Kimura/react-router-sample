@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
+import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -73,6 +74,7 @@ class Login extends Component {
     const {
       classes,
       authenticate: { token },
+      t,
     } = this.props;
 
     if (token) {
@@ -88,7 +90,9 @@ class Login extends Component {
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography variant="headline">Sign in</Typography>
+            <Typography variant="headline">
+              {t('app_name')}
+            </Typography>
             <form
               className={classes.form}
               onSubmit={this.handleSignIn}
@@ -136,6 +140,7 @@ Login.propTypes = {
   classes: PropTypes.shape().isRequired,
   authenticate: PropTypes.shape().isRequired,
   signIn: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -148,6 +153,8 @@ const mapDispatchToProps = dispatch => ({
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(
-    withStyles(styles)(Login)
+    translate()(
+      withStyles(styles)(Login)
+    )
   )
 );
