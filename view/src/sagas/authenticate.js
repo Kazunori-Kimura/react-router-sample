@@ -1,21 +1,16 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
-  SIGNIN_REQUESTED,
+  SIGNIN_REQUESTED, refreshToken,
   signInStart, signInSucceeded, signInFailed,
 } from '../actions';
-
-const BASE_URL = 'http://localhost:8080';
+import { BASE_URL, headers } from '../commons';
 
 /**
- * 認証
+ * /signin に fetch する
  * @param {*} param0 
  */
 async function fetchSignIn({ username, password }) {
-  const headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  };
-
+  // fetch
   const response = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers,
@@ -40,7 +35,11 @@ function* signIn(action) {
     const data = yield call(fetchSignIn, action.payload);
     // 成功
     yield put(signInSucceeded(data));
+
+    // トークン更新処理をキック
+    yield put(refreshToken());
   } catch (err) {
+    // 失敗
     yield put(signInFailed({ error: err }));
   }
 }

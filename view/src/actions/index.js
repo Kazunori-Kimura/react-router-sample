@@ -8,6 +8,8 @@ export const SIGNIN_SUCCEEDED = 'SIGNIN_SUCCEEDED';
 // ログインAPI 失敗
 export const SIGNIN_FAILED = 'SIGNIN_FAILED';
 
+// 認証トークン更新ループの開始
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 // 認証トークン更新 要求
 export const REFRESH_TOKEN_REQUESTED = 'REFRESH_TOKEN_REQUESTED';
 // 認証トークン更新 開始
@@ -41,7 +43,11 @@ export const signInFailed = payload => ({
   payload,
 });
 
-export const refreshToken = payload => ({
+export const refreshToken = () => ({
+  type: REFRESH_TOKEN,
+});
+
+export const refreshTokenRequested = payload => ({
   type: REFRESH_TOKEN_REQUESTED,
   payload,
 });

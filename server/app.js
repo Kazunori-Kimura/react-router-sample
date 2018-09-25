@@ -55,10 +55,10 @@ app.post('/signin', (req, res, next) => {
 });
 
 //
-// GET: /verify
+// POST: /verify
 // - token: jsonwebtoken
 //
-app.get('/verify', (req, res, next) => {
+app.post('/verify', (req, res, next) => {
   try {
     const { token } = req.body;
     const { username } = jwt.verify(token, SECRET_KEY);
