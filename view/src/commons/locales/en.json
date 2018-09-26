@@ -21,10 +21,10 @@
       "list": "Staff List",
       "edit": "Staff Edit"
     },
-    "master": {
+    "config": {
       "root": "Settings",
-      "config": "App Settings",
-      "place": "Room Settings",
+      "app": "App Settings",
+      "room": "Room Settings",
       "report": "Report Settings"
     }
   },

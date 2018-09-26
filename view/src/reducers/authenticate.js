@@ -68,9 +68,10 @@ const authenticate = (state = initialState, action) => {
     };
   } else if (action.type === REFRESH_TOKEN_SUCCEEDED) {
     // トークン更新成功
-    const { token } = action.payload;
+    const { username, token } = action.payload;
     return {
       ...state,
+      username,
       token,
       requesting: false,
       error: null,
@@ -88,14 +89,11 @@ const authenticate = (state = initialState, action) => {
     };
   } else if (action.type === SIGNOUT) {
     // ログアウト
+    // localStorageのtokenを破棄
+    localStorage.removeItem('mytoken');
+    // stateの初期化
     return {
-      ...state,
-      username: '',
-      token: '',
-      requesting: false,
-      error: null,
-      periodic: false,
-      valid: false,
+      ...initialState,
     };
   }
 

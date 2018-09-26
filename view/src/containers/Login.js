@@ -67,7 +67,7 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { verify } = this.props;
     // tokenをlocalStorageから取得
     const data = localStorage.getItem('mytoken');

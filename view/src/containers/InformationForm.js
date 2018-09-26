@@ -25,19 +25,19 @@ const styles = theme => ({
   },
 });
 
-const Top = ({
+const InformationForm = ({
   authenticate: { username },
   classes,
 }) => (
   <main className={classes.layout}>
     <Paper className={classes.paper}>
-      <Typography variant="headline">Top</Typography>
+      <Typography variant="headline">InformationForm</Typography>
       <Typography variant="body1">{username}</Typography>
     </Paper>
   </main>
 );
 
-Top.propTypes = {
+InformationForm.propTypes = {
   classes: PropTypes.shape().isRequired,
   authenticate: PropTypes.shape().isRequired,
 };
@@ -47,5 +47,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(
-  withStyles(styles)(Top)
+  withStyles(styles)(InformationForm)
 );

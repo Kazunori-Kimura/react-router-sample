@@ -8,7 +8,7 @@
   "menu": {
     "cleaning": {
       "root": "清掃管理",
-      "list": "清掃管理一覧",
+      "list": "清掃一覧",
       "edit": "清掃サービス編集"
     },
     "information": {
@@ -21,10 +21,10 @@
       "list": "スタッフ一覧",
       "edit": "スタッフ登録"
     },
-    "master": {
+    "config": {
       "root": "マスター管理",
-      "config": "アプリ設定",
-      "place": "清掃場所設定",
+      "app": "アプリ設定",
+      "room": "清掃場所設定",
       "report": "清掃報告設定"
     }
   },

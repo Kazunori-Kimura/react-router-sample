@@ -6,16 +6,14 @@ import {
 
 import Auth from './containers/Auth';
 import Login from './containers/Login';
-import Top from './containers/Top';
+import Layout from './containers/layouts/Layout';
 
 const App = () => (
   <Router>
     <Switch>
       <Route exact path="/login" component={Login} />
       <Auth>
-        <Switch>
-          <Route path="/" component={Top} />
-        </Switch>
+        <Route path="/" component={Layout} />
       </Auth>
     </Switch>
   </Router>
