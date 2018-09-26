@@ -11,7 +11,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { signIn } from '../actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import purple from '@material-ui/core/colors/purple';
+import { signIn, refreshTokenRequested } from '../actions';
 
 const styles = theme => ({
   layout: {
@@ -39,6 +41,17 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  progressRoot: {
+    width: '100%',
+    height: '60px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
+    color: purple[500],
+  }
 });
 
 class Login extends Component {
@@ -52,6 +65,17 @@ class Login extends Component {
 
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { verify } = this.props;
+    // tokenをlocalStorageから取得
+    const data = localStorage.getItem('mytoken');
+    if (data) {
+      const { token } = JSON.parse(data);
+      // tokenを検証
+      verify(token);
+    }
   }
 
   handleSignIn(e) {
@@ -70,13 +94,38 @@ class Login extends Component {
     this.setState(obj);
   }
 
+  /**
+   * インジケータの表示
+   */
+  renderProgress() {
+    const {
+      classes,
+      authenticate: { requesting }
+    } = this.props;
+
+    if (requesting) {
+      return (
+        <CircularProgress
+          className={classes.progress}
+          thickness={7}
+        />
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const {
       classes,
-      authenticate: { token },
+      authenticate: {
+        token,
+        requesting,
+      },
       t,
     } = this.props;
 
+    // 認証済みならトップ画面に遷移
     if (token) {
       return (
         <Redirect to="/" />
@@ -85,18 +134,26 @@ class Login extends Component {
 
     const { username, password } = this.state;
 
+    // ログイン画面の表示
     return (
       <React.Fragment>
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
+            {/* ロゴ */}
             <Typography variant="headline">
               {t('app_name')}
             </Typography>
+            {/* インジケータ */}
+            <div className={classes.progressRoot}>
+              {this.renderProgress()}
+            </div>
+            {/* ログインフォーム */}
             <form
               className={classes.form}
               onSubmit={this.handleSignIn}
             >
+              {/* ユーザー名 */}
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="username">UserName</InputLabel>
                 <Input
@@ -108,6 +165,7 @@ class Login extends Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
+              {/* パスワード */}
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
@@ -119,14 +177,16 @@ class Login extends Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
+              {/* ログインボタン */}
               <Button
                 type="submit"
                 fullWidth
                 variant="raised"
                 color="primary"
                 className={classes.submit}
+                disabled={requesting}
               >
-                Sign in
+                {t('signin')}
               </Button>
             </form>
           </Paper>
@@ -140,6 +200,7 @@ Login.propTypes = {
   classes: PropTypes.shape().isRequired,
   authenticate: PropTypes.shape().isRequired,
   signIn: PropTypes.func.isRequired,
+  verify: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 
@@ -149,6 +210,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   signIn: (username, password) => dispatch(signIn({ username, password })),
+  verify: token => dispatch(refreshTokenRequested({ token })),
 });
 
 export default withRouter(
